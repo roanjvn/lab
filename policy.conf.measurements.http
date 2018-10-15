@@ -1,0 +1,24 @@
+# Measurements for keeping stats as reported by the HTTP analyzer
+
+# Total number of HTTP flows
+measurement "HttpFlows"
+if expr(Flow.IsNew and Flow.SessionProtocol = Protocol.Http) then \
+  set Measurement.HttpFlows = Measurement.HttpFlows + 1
+
+# Total number of HTTP requests
+measurement "HttpRequests"
+if expr(Flow.SessionProtocol = Protocol.Http and \
+  Flow.Client.Stream.Http.TransactionNumber is not null and \
+  Flow.Client.Stream.Http.Command is not null and \
+  Flow.Client.Stream.Http.IsOverhead = false and \
+  Flow.Client.Stream.Http.IsOverlap = false) then \
+  set Measurement.HttpRequests = Measurement.HttpRequests + 1
+
+# Total number of HTTP responses
+measurement "HttpResponses"
+if expr(Flow.SessionProtocol = Protocol.Http and \
+  Flow.Client.Stream.Http.TransactionNumber is not null and \
+  Flow.Server.Stream.Http.StatusCode is not null and \
+  Flow.Client.Stream.Http.IsOverhead = false and \
+  Flow.Client.Stream.Http.IsOverlap = false) then \
+  set Measurement.HttpResponses = Measurement.HttpResponses + 1

@@ -1,0 +1,22 @@
+
+###############
+# Attribute definitions
+
+attribute "top_talker" values "true" "false"
+attribute "top_talker_uploader" values "true" "false"
+attribute "top_talker_downloader" values "true" "false"
+
+PolicyGroup {
+    if server "top_talker" = "true" then count server subscriber protocol
+    if server "top_talker_uploader" = "true" then count server subscriber protocol
+    if server "top_talker_downloader" = "true" then count server subscriber protocol
+    if true then count server subscriber basic
+}
+
+PolicyGroup {
+    if client "top_talker" = "true" then count client subscriber protocol
+    if client "top_talker_uploader" = "true" then count client subscriber protocol
+    if client "top_talker_downloader" = "true" then count client subscriber protocol
+    if true then count client subscriber basic
+}
+

@@ -1,0 +1,31 @@
+#Default Subnets File
+
+LAB 10 internal
+172.16.0.0/24
+
+allot 10 internal
+10.80.0.0/16
+
+ADSL1 10 internal
+10.1.1.0/24
+
+ADSL2 10 internal
+12.2.2.0/24
+
+ADSL3 10 internal
+13.3.3.0/24
+
+Mobile1 10 internal
+14.4.4.0/24
+
+Mobile2 10 internal
+15.5.5.0/24
+
+Mobile3 10 internal
+16.6.6.0/24
+
+
+#Please refer subnets.txt.sample to edit this file
+default 100 external
+0.0.0.0/0
+::/0
